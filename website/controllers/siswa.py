@@ -174,10 +174,11 @@ def import_file(request):
                 return JsonResponse({'error': 'Kolom yang diperlukan tidak ditemukan'}, status=400)
 
             for index, row in df.iterrows():
-                if not db.Siswa.objects.filter(nisn=row['NISN']).exists():
+                nisn = str(row['NISN']).zfill(10)
+                if not db.Siswa.objects.filter(nisn=nisn).exists():
                     try:
                         db.Siswa.objects.create(
-                            nisn=str(row['NISN']),
+                            nisn=nisn,
                             nama_lengkap=row['Nama'],
                             kelas=db.Kelas.objects.get(romawi=row['Kode Kelas'])
                         )
