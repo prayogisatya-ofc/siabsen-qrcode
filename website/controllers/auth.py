@@ -11,10 +11,10 @@ from django.contrib.auth.decorators import login_required
 
 @require_GET
 def views(request):
-    # if request.user.is_authenticated:
-    #     return redirect('admin_dashboard_view')
-    # else:
-    return render(request, "login.html")
+    if request.user.is_authenticated:
+        return redirect('dashboard_views')
+    else:
+        return render(request, "login.html")
 
 
 @require_POST
