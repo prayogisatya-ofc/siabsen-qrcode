@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Si Absen - {% block title %}{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content="Website absensi dengan QR Code" name="description" />
+    <meta content="Besutodio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="{% static 'assets/images/logo-sdn1ajijaya.png' %}" />
+
+    {% block vendor %}{% endblock vendor %}
+
+    <!-- App css -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <!-- Begin page -->
+    <div id="wrapper">
+        <!-- Topbar Start -->
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+            <div class="container-fluid">
+                <!-- LOGO -->
+                <a href="{% url 'dashboard_views' %}" class="navbar-brand mr-0 mr-md-2 logo">
+                    <span class="logo-lg d-flex align-items-center">
+                        <img src="{% static 'assets/images/logo-sdn1ajijaya.png' %}" alt="" height="30" />
+                        <span class="d-inline h3 ml-2 text-logo text-capitalize">Si Absen</span>
+                    </span>
+                </a>
+
+                <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                    <li class="">
+                        <button class="button-menu-mobile open-left disable-btn">
+                            <i data-feather="menu" class="menu-icon"></i>
+                            <i data-feather="x" class="close-icon"></i>
+                        </button>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+                    <li class="dropdown notification-list" data-toggle="tooltip" data-placement="left" title="" data-original-title="Scan QR">
+                        <a class="nav-link" href="{% url 'scanqr_views' %}">
+                            <i data-feather="camera"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown notification-list" id="full" data-toggle="tooltip" data-placement="left" title="" data-original-title="Full Screen">
+                        <a type="button" href="#" class="nav-link" @click="toggleFullScreen">
+                            <i data-feather="maximize"></i>
+                        </a>
+                    </li>
+                    <li class="dropdown notification-list align-self-center">
+                        <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+                            aria-haspopup="false" aria-expanded="false">
+                            <div class="media user-profile px-0">
+                                <img src="https://ui-avatars.com/api/?name={{ request.user.first_name }}+{{ request.user.last_name }}&background=random"
+                                    alt="user-image" class="rounded-circle align-self-center" />
+                                <div class="media-body text-left">
+                                    <h6 class="pro-user-name ml-2 my-0">
+                                        <span>{{ request.user.first_name }} {{ request.user.last_name }}</span>
+                                        <span class="pro-user-desc text-muted text-lowercase d-block mt-1">@{{ request.user.username }}</span>
+                                    </h6>
+                                </div>
+                                <span data-feather="chevron-down" class="ml-2 align-self-center"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
+                            <a href="{% url 'logout' %}" class="dropdown-item notify-item">
+                                <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- end Topbar -->
+
+        <!-- ========== Left Sidebar Start ========== -->
+        <div class="left-side-menu">
+            <div class="sidebar-content">
+                <!--- Sidemenu -->
+                <div id="sidebar-menu" class="slimscroll-menu">
+                    <ul class="metismenu" id="menu-bar">
+                        <li class="menu-title">Navigasi</li>
+
+                        <li>
+                            <a href="{% url 'dashboard_views' %}">
+                                <i data-feather="home"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+                        <li class="menu-title">Data Master</li>
+                        <li>
+                            <a href="{% url 'class_views' %}">
+                                <i data-feather="tag"></i>
+                                <span>Data Kelas</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'students_views' %}">
+                                <i data-feather="users"></i>
+                                <span>Data Siswa</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'teachers_views' %}">
+                                <i data-feather="user"></i>
+                                <span>Data Guru</span>
+                            </a>
+                        </li>
+                        <li class="menu-title">Absensi</li>
+                        <li>
+                            <a href="{% url 'scanqr_views' %}">
+                                <i data-feather="camera"></i>
+                                <span>Scan QR</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);" aria-expanded="false" class="mm-collapsed">
+                                <i data-feather="clipboard"></i>
+                                <span>Data Absensi</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level mm-collapse" aria-expanded="false">
+                                <li>
+                                    <a href="{% url 'presences_views' %}">Absen Siswa</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'teachers_presences_views' %}">Absen Guru</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+            </div>
+            <!-- Sidebar -left -->
+        </div>
+        <!-- Left Sidebar End -->
+
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            <div class="content">
+                {% block content %} {% endblock content %}
+            </div>
+            <!-- Footer Start -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            &copy; 
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            , Si Absen. Crafted with
+                            <i class="uil uil-heart text-danger font-size-12"></i> by
+                            <a href="https://besutodio.com" target="_blank">Besutodio</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- end Footer -->
+        </div>
+
+        <!-- ============================================================== -->
+        <!-- End Page content -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- END wrapper -->
+
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    <!-- Vendor js -->
+    <script src="{% static 'assets/js/vendor.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" integrity="sha512-eYSzo+20ajZMRsjxB6L7eyqo5kuXuS2+wEbbOkpaur+sA2shQameiJiWEzCIDwJqaB0a4a6tCuEvCOBHUg3Skg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- App js -->
+    <script src="{% static 'assets/js/app.min.js' %}"></script>
+    <script src="{% static 'assets/js/fullscreen.js' %}"></script>
+
+    <script>const token = '{{ csrf_token }}';</script>
+    {% block script %} {% endblock script %}
+</body>
+
+</html>

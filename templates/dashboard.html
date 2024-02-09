@@ -1,0 +1,99 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block vendor %}
+<link rel="stylesheet" href="{% static 'assets/libs/apexcharts/apex-charts.css' %}">
+{% endblock vendor %}
+
+{% block title %}
+Dashboard
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid" id="app">
+    <div class="row page-title align-items-center">
+        <div class="col-sm-4 col-xl-6">
+            <h4 class="mb-1 mt-0">Dashboard</h4>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="row">
+        <div class="col-md-6 col-xl-3 col-6">
+            <div class="card bg-success">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-white text-uppercase font-size-12 font-weight-bold">Total Siswa</span>
+                            <h2 class="mb-0 text-white">{{ total_siswa }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-6">
+            <div class="card bg-warning">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-white text-uppercase font-size-12 font-weight-bold">Total Kelas</span>
+                            <h2 class="mb-0 text-white">{{ total_kelas }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3 col-6">
+            <div class="card bg-white">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-uppercase font-size-12 font-weight-bold">Absen Hari ini</span>
+                            <h2 class="mb-0">{{ absen_hari_ini }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-3 col-6">
+            <div class="card bg-white">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-uppercase font-size-12 font-weight-bold">Absen Minggu ini</span>
+                            <h2 class="mb-0">{{ absen_minggu_ini }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- stats + charts -->
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4 header-title">Absensi Siswa Hari ini</h5>
+                    <div ref="grafikAbsensi"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4 header-title">Absensi Guru Hari ini</h5>
+                    <div ref="grafikAbsensiGuru"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- row -->
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/libs/apexcharts/apexcharts.js' %}"></script>
+<script src="{% static 'assets/js/pages/dashboard.js' %}"></script>
+{% endblock script %}

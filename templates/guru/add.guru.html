@@ -1,0 +1,62 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+    Tambah Guru
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid" id="app">
+    <form @submit.prevent="onSubmit">
+        <div class="row page-title align-items-center">
+            <div class="col-12 col-xl-6 mb-3 mb-xl-0">
+                <h4 class="mb-1 mt-0">Tambah Guru</h4>
+                <p class="mb-0">Pastikan datanya benar yaa..</p>
+            </div>
+            <div class="col-12 col-xl-6">
+                <button type="submit" class="btn btn-primary float-left float-xl-right"><i class="uil uil-check mr-2"></i>Simpan</button>
+            </div>
+        </div>
+    
+        <!-- content -->
+        <div class="row">
+            <div class="col-xl-6">
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" placeholder="Jhon Doe" required v-model="form.nama">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">NIP/NUPTK</label>
+                            <input type="text" class="form-control" placeholder="1234567890" required v-model="form.kode">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <select class="form-control custom-select" required v-model="form.status">
+                                <option value="true">Aktif</option>
+                                <option value="false">Nonaktif</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Foto</label><br>
+                            <img :src="fotoPreview" v-if="form.foto" width="150" class="mb-2">
+                            <input type="file" class="form-control" accept="image/*" @change="onFileChange">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/js/pages/add.guru.js' %}"></script>
+{% endblock script %}

@@ -1,0 +1,62 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block vendor %}
+<style>
+    .img-siswa {
+        width: 40px;
+        height: 40px;
+        background-position: top;
+        background-size: cover;
+    }
+</style>
+{% endblock vendor %}
+
+{% block title %}
+    Detail Absensi Guru
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid" id="app">
+    <div class="row page-title align-items-center">
+        <div class="col-12 col-xl-6 mb-3 mb-xl-0">
+            <h4 class="mb-1 mt-0">Detail Absensi Guru</h4>
+            <p class="mb-0"><b>[[ form.tanggal ]]</b></p>
+        </div>
+        <div class="col-12 col-xl-6">
+            <button class="btn btn-danger float-left float-xl-right" @click="deleteData(form.id, form.tanggal)"><i class="uil uil-trash mr-2"></i>Hapus Absen</button>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="row">
+        <div class="col-xl-5">
+            <div class="card bg-white">
+                <div class="card-body">
+                    <h5 class="font-weight-semibold mb-3 mt-0">Guru Hadir</h5>
+                    <div style="max-height: 30rem; overflow-y: auto;">
+                        <div v-for="(data, i) in detailAbsensi" :key="i" class="d-flex align-items-center py-3 border-top">
+                            <div v-if="data.foto" class="img-siswa mr-3 rounded" :style='"background-image: url(" + data.foto + ")"'></div>
+                            <img v-else :src="'https://ui-avatars.com/api/?name=' + data.nama + '&background=random'" alt="siswa" class="rounded-circle mr-3" width="40" />
+                            <div>
+                                <h6 class="mb-1 mt-0">[[ data.nama ]]</h6>
+                                <div class="d-flex">
+                                    <span class="badge badge-soft-success mr-1">[[ data.jam_masuk ]] WIB</span>
+                                    <span class="badge badge-soft-danger">[[ data.jam_keluar ]] WIB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center" v-if="detailAbsensi.length == 0">
+                            Belum ada siswa di absen
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/js/pages/detail.absensi.guru.js' %}"></script>
+{% endblock script %}

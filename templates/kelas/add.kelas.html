@@ -1,0 +1,67 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block plugin %}
+
+{% endblock plugin %}
+
+{% block title %}
+Tambah Kelas
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid" id="app">
+    <form @submit.prevent="onSubmit">
+        <div class="row page-title align-items-center">
+            <div class="col-12 col-xl-6 mb-3 mb-xl-0">
+                <h4 class="mb-1 mt-0">Tambah Kelas</h4>
+                <p class="mb-0">Pastikan datanya benar yaa..</p>
+            </div>
+            <div class="col-12 col-xl-6">
+                <button type="submit" class="btn btn-primary float-left float-xl-right"><i class="uil uil-check mr-2"></i>Simpan</button>
+            </div>
+        </div>
+    
+        <!-- content -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-white">
+                    <div class="card-body">
+                        <div class="alert badge-soft-primary mb-3">
+                            <ul style="margin-left: -1.5rem" class="mb-0">
+                                <li>Angka digunakan untuk fitur naik kelas.</li>
+                                <li>Rombel untuk spesifikasi kelas siswa.</li>
+                                <li>Romawi digunakan sebagai ID kelas untuk fitur Import Siswa.</li>
+                            </ul>
+                        </div>
+                        <div class="border-bottom mb-3" v-for="(form, i) in forms" :key="i">
+                            <div class="row">
+                                <div class="form-group col-xl-4">
+                                    <label class="form-label">Angka</label>
+                                    <input type="number" class="form-control" placeholder="Ex: 1" required v-model="form.angka">
+                                </div>
+                                <div class="form-group col-xl-4">
+                                    <label class="form-label">Rombel</label>
+                                    <input type="text" class="form-control" placeholder="Ex: A" required v-model="form.rombel">
+                                </div>
+                                <div class="form-group col-xl-2">
+                                    <label class="form-label">Romawi</label>
+                                    <input type="text" class="form-control" placeholder="Ex: IA" required v-model="form.romawi">
+                                </div>
+                                <div class="form-group col-xl-2">
+                                    <button type="button" @click="removeForm(i)" class="btn btn-danger" style="margin-top: 1.8rem;"><i class="uil uil-times mr-2"></i>Hapus</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" @click="addForm" class="btn btn-primary"><i class="uil uil-plus mr-2"></i>Tambah</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/js/pages/add.kelas.js' %}"></script>
+{% endblock script %}

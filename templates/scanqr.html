@@ -1,0 +1,41 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+    Scan QR
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid" id="app">
+    <div class="row page-title align-items-center">
+        <div class="col-12 col-xl-6">
+            <h4 class="mb-1 mt-0">Scan QR</h4>
+            <p class="mb-0">Scan QR Code di kartu siswa atau guru</p>
+        </div>
+    </div>
+
+    <!-- content -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card bg-white mb-3">
+                <div class="card-body">
+                    <select class="form-control custom-select" v-model="type">
+                        <option value="siswa">Absen Siswa</option>
+                        <option value="guru">Absen Guru</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card bg-white">
+                <div class="card-body">
+                    <div id="reader" width="600px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="{% static 'assets/js/html5-qrcode.min.js' %}"></script>
+<script src="{% static 'assets/js/pages/scanqr.js' %}"></script>
+{% endblock script %}
