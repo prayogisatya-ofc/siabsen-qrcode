@@ -177,7 +177,7 @@ def import_file(request):
                 if not db.Siswa.objects.filter(nisn=row['NISN']).exists():
                     try:
                         db.Siswa.objects.create(
-                            nisn=row['NISN'],
+                            nisn=str(row['NISN']),
                             nama_lengkap=row['Nama'],
                             kelas=db.Kelas.objects.get(romawi=row['Kode Kelas'])
                         )

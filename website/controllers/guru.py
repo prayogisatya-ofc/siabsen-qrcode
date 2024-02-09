@@ -164,7 +164,7 @@ def import_file(request):
                 if not db.Guru.objects.filter(kode=row['NIP/NUPTK']).exists():
                     try:
                         db.Guru.objects.create(
-                            kode=row['NIP/NUPTK'],
+                            kode=str(row['NIP/NUPTK']),
                             nama=row['Nama'],
                         )
                     except Exception as e:
