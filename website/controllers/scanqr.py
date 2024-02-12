@@ -4,7 +4,8 @@ from .. import models as db
 from django.http import JsonResponse
 from django.views.decorators.http import require_GET, require_POST
 from django.core.paginator import Paginator
-import json, datetime
+import json, datetime, asyncio
+from .telegrambot import send_telegram_message
 
 
 @require_GET
@@ -64,6 +65,7 @@ def absensi(request):
                     guru=guru,
                     jam_masuk=jam_masuk
                 )
+                asyncio.run(send_telegram_message(f"{guru.nama} melakukan absen masuk pada jam {jam_masuk} WIB"))
                 return JsonResponse({
                     'success': f"<b>{guru.nama}</b> berhasil melakukan absen <b>masuk</b>.",
                     'foto': guru.foto.url if guru.foto else None
@@ -73,6 +75,7 @@ def absensi(request):
                 jam_keluar = datetime.datetime.now().time().strftime('%H:%M:%S')
                 detail_absensi_guru.jam_keluar = jam_keluar
                 detail_absensi_guru.save()
+                asyncio.run(send_telegram_message(f"{guru.nama} melakukan absen keluar pada jam {jam_keluar} WIB"))
                 return JsonResponse({
                     'success': f"<b>{guru.nama}</b> berhasil melakukan absen <b>keluar</b>.",
                     'foto': guru.foto.url if guru.foto else None
